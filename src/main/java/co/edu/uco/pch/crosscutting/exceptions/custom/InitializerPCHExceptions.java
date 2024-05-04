@@ -7,12 +7,12 @@ public final class InitializerPCHExceptions extends PCHException {
 	private static final long serialVersionUID = -9112438537604124056L;
 
 	public InitializerPCHExceptions(final String mensajeUsuario) {
-		super(mensajeUsuario, Lugar.DATA);
+		super(mensajeUsuario, Lugar.INITIALIZER);
 	
 	}
 
 	public InitializerPCHExceptions(final String mensajeTecnico, final String mensajeUsuario, Throwable exceptionRaiz) {
-		super(mensajeTecnico, mensajeUsuario, Lugar.DATA, exceptionRaiz);
+		super(mensajeTecnico, mensajeUsuario, Lugar.INITIALIZER, exceptionRaiz);
 	
 	}
 

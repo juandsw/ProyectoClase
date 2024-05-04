@@ -5,6 +5,8 @@ import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
 public final class TextHelper {
 	
 	public static final String EMPTY = "";
+	public static final String UNDERLINE = "_";
+	
 	
 	private TextHelper() {
 		super();
@@ -23,10 +25,25 @@ public final class TextHelper {
 	}
 	
 	public static final String getDefaultValue(final String string) {
-		return getDefaultValue(string);
+		return getDefaultValue(string, EMPTY);
 	}
 	
 	public static final String applyTrim(final String string) {
 		return getDefaultValue(string).trim();
+	}
+	
+	public static final String concatenate(String... strings) {
+		final var sb = new StringBuilder(EMPTY);
+		
+		if(!ObjectHelper.getObjectHelper().isNull(strings)) {
+			
+			for (final var string : strings) {
+				sb.append(applyTrim(string));
+				
+			}
+		}
+		
+		return sb.toString();
+		
 	}
 }

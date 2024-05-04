@@ -7,31 +7,44 @@ import co.edu.uco.pch.crosscutting.helpers.TextHelper;
 
 public class PCHException extends RuntimeException {
 
-	private static final long serialVersionUID = -1470166199906813987L;
-	
-	public PCHException(String mensajeTecnico,String mensajeUsuario, Lugar lugar, Throwable exceptionRaiz) {
-		super(mensajeTecnico, exceptionRaiz);
-		setMensajeUsuario(mensajeUsuario);
-		setLugar(lugar);
-	}
-	
-	public PCHException(final String mensajeUsuario, final Lugar lugar) {
-		
-		super(mensajeUsuario, new Exception());
-		setMensajeUsuario(mensajeUsuario);
-		setLugar(lugar);
-		
-	}
-	
-	private final void setMensajeUsuario(final String mensajeUsuario) {
-		this.mensajeUsuario = TextHelper.applyTrim(mensajeUsuario);
-	}
-	private final void setLugar(final Lugar lugar) {
-		this.lugar = ObjectHelper.getObjectHelper().getDefaultValue(lugar, Lugar.DEFAULT);
-	}
-
+	private static final long serialVersionUID = -1204292929766811976L;
 	protected String mensajeUsuario;
 	protected Lugar lugar;
 	
+	public PCHException(String mensajeTecnico,String mensajeUsuario, Lugar lugar, Throwable excepcionRaiz) {
+		super(mensajeTecnico,excepcionRaiz);
+		setMensajeUsuario(mensajeUsuario);
+		setLugar(lugar);
+	}
+	public PCHException(final String mensajeUsuario, Lugar lugar) {
+		super(mensajeUsuario);
+		setMensajeUsuario(mensajeUsuario);
+		setLugar(lugar);
+	}
+	
+	public PCHException( String mensajeTecnico,String mensajeUsuario, Lugar lugar) {
+		super(mensajeTecnico);
+		setMensajeUsuario(mensajeUsuario);
+		setLugar(lugar);
+	}
+	private void setMensajeUsuario(final String mensajeUsuario) {
+		this.mensajeUsuario = TextHelper.applyTrim(mensajeUsuario);
+	}
 
+	private void setLugar(final Lugar lugar) {
+		this.lugar = ObjectHelper.getObjectHelper().getDefaultValue(lugar, Lugar.DEFAULT);
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public final String getMensajeUsuario() {
+		return mensajeUsuario;
+	}
+
+	public final Lugar getLugar() {
+		return lugar;
+	}
+		
 }

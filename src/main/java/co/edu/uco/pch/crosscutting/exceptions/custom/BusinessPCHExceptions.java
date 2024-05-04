@@ -7,12 +7,12 @@ public final class BusinessPCHExceptions extends PCHException {
 	private static final long serialVersionUID = -9112438537604124056L;
 
 	public BusinessPCHExceptions(final String mensajeUsuario) {
-		super(mensajeUsuario, Lugar.DATA);
+		super(mensajeUsuario, Lugar.BUSINESS);
 	
 	}
 
 	public BusinessPCHExceptions(final String mensajeTecnico, final String mensajeUsuario, Throwable exceptionRaiz) {
-		super(mensajeTecnico, mensajeUsuario, Lugar.DATA, exceptionRaiz);
+		super(mensajeTecnico, mensajeUsuario, Lugar.BUSINESS, exceptionRaiz);
 	
 	}
 

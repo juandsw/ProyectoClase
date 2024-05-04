@@ -7,12 +7,12 @@ public final class DtoPCHExceptions extends PCHException {
 	private static final long serialVersionUID = -9112438537604124056L;
 
 	public DtoPCHExceptions(final String mensajeUsuario) {
-		super(mensajeUsuario, Lugar.DATA);
+		super(mensajeUsuario, Lugar.DTO);
 	
 	}
 
 	public DtoPCHExceptions(final String mensajeTecnico, final String mensajeUsuario, Throwable exceptionRaiz) {
-		super(mensajeTecnico, mensajeUsuario, Lugar.DATA, exceptionRaiz);
+		super(mensajeTecnico, mensajeUsuario, Lugar.DTO, exceptionRaiz);
 	
 	}
 
