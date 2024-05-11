@@ -4,13 +4,14 @@ import co.edu.uco.pch.crosscutting.exceptions.custom.CrosscuttingPCHExceptions;
 import co.edu.uco.pch.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.pch.crosscutting.exceptions.messagecatalog.data.Mensaje;
 import co.edu.uco.pch.crosscutting.exceptions.messagecatalog.impl.MessageCatalogBase;
+import co.edu.uco.pch.crosscutting.exceptions.messagecatalog.impl.MessageCatalogExternalService;
 import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
 
 public final class MessageCatalogStrategy {
 	
 	private static final MessageCatalog base = new MessageCatalogBase();
 	
-	private static final MessageCatalog externalService  = new MessageCatalogBase();
+	private static final MessageCatalog externalService  = new MessageCatalogExternalService();
 	
 	static {
 		
@@ -29,7 +30,7 @@ public final class MessageCatalogStrategy {
 	}
 	
 	private static final MessageCatalog getStrategy(final boolean isBase) {
-		return isBase? base : externalService;
+		return isBase ? base : externalService;
 	}
 	
 	public static final Mensaje getMensaje(final CodigoMensaje codigo, final String...parametros) {
@@ -52,7 +53,7 @@ public final class MessageCatalogStrategy {
 	
 	public static void main(String[] args) {
 		
-		System.out.println(getContenidoMensaje(CodigoMensaje.M00008));
+		System.out.println(getContenidoMensaje(CodigoMensaje.M00007));
 		
 	}
 	
