@@ -15,7 +15,7 @@ public final class DepartamentoDTO {
 		super();
 		setId (id);
 		setNombre (nombre);
-		setPais  (pais);
+		setPais  (PaisDTO.build());
 	}
 	
 	public static final DepartamentoDTO build() {

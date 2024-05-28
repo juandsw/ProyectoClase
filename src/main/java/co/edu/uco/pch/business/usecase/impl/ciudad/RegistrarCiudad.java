@@ -6,25 +6,29 @@ import co.edu.uco.pch.business.assembler.entity.impl.DepartamentoAssemblerEntity
 import co.edu.uco.pch.business.domain.CiudadDomain;
 import co.edu.uco.pch.business.usecase.UseCaseWithoutReturn;
 import co.edu.uco.pch.crosscutting.helpers.ObjectHelper;
+import co.edu.uco.pch.crosscutting.helpers.TextHelper;
 import co.edu.uco.pch.crosscutting.helpers.UUIDHelper;
 import co.edu.uco.pch.data.dao.factory.DAOFactory;
 import co.edu.uco.pch.entity.CiudadEntity;
 import co.edu.uco.pch.entity.DepartamentoEntity;
 import co.edu.uco.pch.crosscutting.exceptions.custom.BusinessPCHExceptions;
+import co.edu.uco.pch.crosscutting.exceptions.messagecatalog.MessageCatalogStrategy;
+import co.edu.uco.pch.crosscutting.exceptions.messagecatalog.data.CodigoMensaje;
 
 public final class RegistrarCiudad implements UseCaseWithoutReturn<CiudadDomain> {
 	
 	private DAOFactory factory;
+	private static final int MAX_LENGTH_NOMBRE_CIUDAD = 30;
 	
 	
 
 	public RegistrarCiudad(final DAOFactory factory) {
 		if(ObjectHelper.getObjectHelper().isNull(factory)) {
-			var mensajeUsuario = "Se ha presentado un problema tratando de llevar a  cabo el registro de la ciudad...";
-			var mensajeTecnico = "El dao factory para crear la ciudad llegó nulo...";
-			
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00027);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00030);
 			throw new BusinessPCHExceptions(mensajeTecnico, mensajeUsuario);
 		}
+		
 		this.factory = factory;
 	}
 
@@ -35,6 +39,8 @@ public final class RegistrarCiudad implements UseCaseWithoutReturn<CiudadDomain>
 		// 1. Validar que los datos requeridos por el caso de uso sean correctos de tipo de dato, longitud, obligotariedad, formato, rango
 		
 		// 2. Validar que no exista otra ciudad con el mismo nombre para el mismo departamento
+		
+		validarDatos(data);
 		
 		validarCiudadMismoNombreMismoDepartamento(data.getNombre(), data.getDepartamento().getId());
 		
@@ -74,6 +80,38 @@ public final class RegistrarCiudad implements UseCaseWithoutReturn<CiudadDomain>
 			throw new BusinessPCHExceptions(mensajeUsuario);
 		}
 	}
+	
+	private void validarDatos(final CiudadDomain data) {
+
+		if (TextHelper.isNull(data.getNombre())) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00033);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00034);
+			throw new BusinessPCHExceptions(mensajeUsuario,mensajeTecnico);
+		}
+
+		if (ObjectHelper.getObjectHelper().isNull(data.getDepartamento())) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00035);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00036);
+			throw new BusinessPCHExceptions(mensajeTecnico,mensajeUsuario);
+		}
+
+		if (data.getNombre().length() > MAX_LENGTH_NOMBRE_CIUDAD) {
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00037);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00038);
+			throw new BusinessPCHExceptions(mensajeTecnico,mensajeUsuario);
+		}
+
+		if (!isValidCityNameFormat(data.getNombre())) {
+			var mensajeUsuario= MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00039);
+			var mensajeTecnico = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00040);
+			throw new BusinessPCHExceptions(mensajeTecnico,mensajeUsuario);
+		}
+	}
+
+	private boolean isValidCityNameFormat(String nombre) {
+
+		return nombre.matches("[a-zA-Z]+");
+}
 
 }
 

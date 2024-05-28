@@ -45,7 +45,7 @@ public class CiudadDomain {
 
 	// Setters
 	private final void setId(final UUID id) {
-		this.id = UUIDHelper.getDafault(id, UUIDHelper.getDefault());
+		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
 	}
 	
 	private final void setNombre(final String nombre) {

@@ -12,7 +12,7 @@ public final class BusinessPCHExceptions extends PCHException {
 	}
 	
 	public BusinessPCHExceptions(final String mensajeUsuario, final String MensajeTecnico) {
-		super(mensajeUsuario, Lugar.BUSINESS);
+		super(mensajeUsuario, MensajeTecnico,Lugar.BUSINESS);
 	
 	}
 
